@@ -14,8 +14,9 @@ The asteroids move at a constant vector and change the angle of motion when hitt
 
 ## Operating Instructions:
 1. Download all the files.
-2. Put the files in the same folder.
-3. In the command line, write the following command:
-4. "python main.py"
-5. Start play  ! !
+2. Install "mediapipe" and "cvzone". 
+3. Put the files in the same folder.
+4. In the command line, write the following command:
+5. "python main.py"
+6. Start playing  ! !
 
