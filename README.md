@@ -4,8 +4,13 @@ A computer game based on python opencv
 >Made by Nadav Moyal.  
 
 ## Introduction:
-This project is a computer game based on python opencv.
+This project is a camera pc game based on python opencv.
 The project is a self-project that use a camera and handheld recognition technology.
+
+## Game description:
+The game simulates a spaceship and asteroids.
+The player moves the spaceship with the palm of his hand and must dodge the asteroids.
+The asteroids move at a constant vector and change the angle of motion when hitting the walls.
 
 ## Operating Instructions:
 1. Download all the files.
