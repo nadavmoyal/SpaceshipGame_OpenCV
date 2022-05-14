@@ -1,5 +1,3 @@
-![Pokemon_icon](![image](https://user-images.githubusercontent.com/93326335/168446135-e77b5095-963e-4c7f-92c9-8512b73f2f8e.png))
-
 # SpaceshipGame_OpenCV
 A computer game based on python opencv
 # Python opencv project:
@@ -21,4 +19,8 @@ The asteroids move at a constant vector and change the angle of motion when hitt
 4. In the command line, write the following command:
 5. "python main.py"
 6. Start playing  ! !
+
+
+
+https://user-images.githubusercontent.com/93326335/168446223-a9c5a8a6-3469-43fd-9530-9eee848787b6.mp4
 
