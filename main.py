@@ -2,9 +2,7 @@ import cv2
 import cvzone
 from cvzone.HandTrackingModule import HandDetector
 import numpy as np
-import math
 import time
-
 
 cap = cv2.VideoCapture(0)
 cap.set(3, 1280)
@@ -12,7 +10,6 @@ cap.set(4, 720)
 # Importing all images
 
 imgBackground = cv2.imread("Background4.png")
-# imgGameOver = cv2.imread("gameOver.png")
 imgBall = cv2.imread("meteor3.png", cv2.IMREAD_UNCHANGED)
 imgBall2 = cv2.imread("meteor3.png", cv2.IMREAD_UNCHANGED)
 imgBall3 = cv2.imread("meteor3.png", cv2.IMREAD_UNCHANGED)
@@ -23,11 +20,11 @@ start = time.time()
 # Variables
 gameOver=False
 ballPos = [100, 100]
-speedX = 50
-speedY = 50
-ballPos2 = [700, 50]
-speedX2 = 45
-speedY2 = 45
+speedX = 30
+speedY = 30
+ballPos2 = [700, 250]
+speedX2 = 25
+speedY2 = 25
 ballPos3 = [1000, 500]
 speedX3 = 15
 speedY3 = 15
@@ -37,42 +34,6 @@ speedY4 = 25
 
 detector = HandDetector(detectionCon=0.8, maxHands=1)
 
-# class Worm:
-#     def __init__(self):
-#         self.points = []
-#         self.lengths = []
-#         self.currentLength = 0
-#         self.allowedLength = 455
-#         self.previousHead = 0, 0
-#
-#     def update(self, imgMain,currentHead):
-#         px, py = self.previousHead
-#         cx, cy = currentHead
-#
-#         self.points.append([cx, cy])
-#         distance = math.hypot(cx - px, cy - py)
-#         self.lengths.append(distance)
-#         self.currentLength += distance
-#         self.previousHead = cx, cy
-#
-#         # Length Reduction
-#         if self.currentLength > self.allowedLength:
-#             for i, length in enumerate(self.lengths):
-#                 self.currentLength -= length
-#                 self.lengths.pop(i)
-#                 self.points.pop(i)
-#                 if self.currentLength < self.allowedLength:
-#                     break
-#         # Draw Snake
-#         if self.points:
-#             for i, point in enumerate(self.points):
-#                 if i != 0:
-#                     cv2.line(imgMain, self.points[i - 1], self.points[i], (0, 0, 0), 20)
-#             cv2.circle(imgMain, self.points[-1], 20, (0, 0, 0), cv2.FILLED)
-#             return imgMain
-
-
-# game = Worm()
 
 while True:
     _, img = cap.read()
@@ -91,40 +52,29 @@ while True:
                 cvzone.putTextRect(img, f'Your Score: {total}', [200, 500],
                                    scale=7, thickness=6, offset=20,colorR=(0, 0, 0))
             else:
-                print("Stopwatch started..")
-
                 x, y, w, h = hand['bbox']
                 h1, w1, _ = bat1.shape
                 y1 = y - h1 // 2
                 y1 = np.clip(y1, 20, 415)
                 lmList = hands[0]['lmList']
                 pointIndex = lmList[8][0:2]
-                # img = game.update(img, pointIndex)
-                # cv2.circle(img, pointIndex, 25, (0, 0, 0), cv2.FILLED)
-                # _, img = cap.read()
-                # img = cv2.flip(img, 1)
-                img = cvzone.overlayPNG(img, bat1, (x+80, y1))
+                img = cvzone.overlayPNG(img, bat1, (x, y1))
 
-                if(abs(ballPos[0]-(x+80))<45 and abs(ballPos[1]-y1)<45) \
-                        or (abs(ballPos2[0]-(x+80))<43 and abs(ballPos2[1]-y1)<43)\
-                        or (abs(ballPos3[0]-(x+80))<43 and abs(ballPos3[1]-y1)<43)\
-                        or (abs(ballPos4[0]-(x+80))<43 and abs(ballPos4[1]-y1)<43):
-                    speedX=0
-                    speedY=0
-                    speedX2= 0
-                    speedY2= 0
-                    speedX3= 0
-                    speedY3= 0
-                    speedX4 = 0
-                    speedY4 = 0
-                    # time when you stop
+                if(abs(ballPos[0]-(x+80))<50 and abs(ballPos[1]-y1)<50) \
+                        or (abs(ballPos2[0]-(x+80))<50 and abs(ballPos2[1]-y1)<50)\
+                        or (abs(ballPos3[0]-(x+80))<50 and abs(ballPos3[1]-y1)<50)\
+                        or (abs(ballPos4[0]-(x+80))<50 and abs(ballPos4[1]-y1)<50):
+                    #astroids - stop moving.
+                    speedX,speedY,speedX2,speedY2,speedX3,speedY3,speedX4,speedY4 = 0,0,0,0,0,0,0,0
+
+                    # stop the time for score
                     end = time.time()
                     total = round(end - start, 2)
-                    total=int(total)
+                    total=int(total*17.5)
                     gameOver=True
 
     # Overlaying the background image
-    img = cv2.addWeighted(img, 0.5, imgBackground,0.3, 0)
+    img = cv2.addWeighted(img, 0.8, imgBackground,0.4, 0)
 
     #move the ball
     if ballPos[1]>=650 or ballPos[1]<=10:
@@ -139,7 +89,7 @@ while True:
 
     if ballPos2[1]>=600 or ballPos2[1]<=10:
         speedY2=-speedY2
-    if ballPos2[0]>=1100 or ballPos2[0]<=70:
+    if ballPos2[0]>=1120 or ballPos2[0]<=70:
         speedX2=-speedX2
     ballPos2[0] += speedX2
     ballPos2[1] += speedY2
