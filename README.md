@@ -24,5 +24,6 @@ The asteroids move at a constant vector and change the angle of motion when hitt
 6. Start playing  ! !
 
 
-https://user-images.githubusercontent.com/93326335/168446223-a9c5a8a6-3469-43fd-9530-9eee848787b6.mp4
+https://user-images.githubusercontent.com/93326335/168461627-4b83219d-ba34-445f-b046-3cbaab2055ca.mp4
+
 
